@@ -26,6 +26,28 @@ timestamp = CurrentTimestamp();
 stringToSign = bodyMD5Hash + ":" + timestamp + ":" + endpoint;
 signature = Base64 ( HMAC-SHA256 ( Base64-Decode ( clientSecret ), UTF8 ( concatenatedString ) ) );
 ```
+Typescript example
+```typescript
+const generateSignature = ({
+  clientSecret,
+  body,
+  timestamp,
+  endpoint,
+}: {
+  clientSecret: string;
+  body: object;
+  timestamp: string;
+  endpoint: string;
+}) => {
+  const hash = crypto.createHash('md5');
+  let hmac = crypto.createHmac('sha256', Buffer.from(clientSecret, 'base64'));
+  let contentMD5 = hash.update(utf8.encode(JSON.stringify(body))).digest('base64');
+  let stringToSign = `${contentMD5}:${timestamp}:${endpoint}`;
+  hmac.update(stringToSign);
+  return hmac.digest('base64');
+};
+
+```
 ## Request headers
 ```
 x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
