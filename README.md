@@ -29,6 +29,9 @@ signature = Base64 ( HMAC-SHA256 ( Base64-Decode ( clientSecret ), UTF8 ( concat
 ```
 Typescript example
 ```typescript
+import crypto from 'crypto';
+import utf8 from 'utf8';
+
 const generateSignature = ({
   clientSecret,
   body,
