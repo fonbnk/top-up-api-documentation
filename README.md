@@ -38,7 +38,7 @@ Name|Description
 [Get balance](#balance-request)|Get MIN tokens account balance
 [Verify top-up request](#verify-top-up-request)|Verify data for creating a request to top-up a specified phone number
 [Create top-up request](#create-top-up-request)|Create a request to top-up a specified phone number
-[Get top-up request by id](#get-request-by-id)|Get the details of an top-up request
+[Get top-up request by id](#get-top-up-request-by-id)|Get the details of an top-up request
 
 ## Balance request
 ```
@@ -130,7 +130,7 @@ A successful request will return the following JSON encoded response
 }
 ```
 
-## Get top-up request by id request
+## Get top-up request by id
 ```
 Request URL
 [GET] https://dev-aten.fonbnk-services.com/api/v1/top-up/request/<REQUEST_ID>
