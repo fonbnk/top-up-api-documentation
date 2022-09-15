@@ -19,6 +19,7 @@ The algorithm used to compute the signature is described in the followings steps
 5. Decode the base64 encoded clientSecret
 6. Compute the SHA256 hash of the concatenated string. Use decoded clientSecret as a key. Convert the result to base64
 7. Add the clientId, signature and timestamp to HTTP headers
+
 The following pseudocode example demonstrates and explains how to sign a request
 ```
 bodyMD5Hash = Base64 ( MD5 ( UTF8 ( [BODY] ) ) );
