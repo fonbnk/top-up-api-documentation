@@ -1,16 +1,13 @@
 # Fonbnk Inc. top-up API
 
-## API Structure
-The API uses an HTTP/REST architecture. The parameters of an HTTP GET request must be specified in the query string. API responses are encoded in JSON format and use standard HTTP response codes.
 
-## API Security
-The API is secured using HMAC256 signatures. API requests are only accepted over HTTPS.
+## API Reference
+The API is organized around REST. The API accepts json-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
 
 ## Request Authentication
-API client requests are authenticated and authorized using a supplied clientId and clientSecret. For every request, the API client must include the clientId and sign the request using the clientSecret.
+All requests should be signed using a HMAC256 algorithm and provided clientId and clientSecret.
 
-## Computing the Signature
-The algorithm used to compute the signature is described in the followings steps
+## How to compute the signature?
 1. Generate a timestamp (Epoch Unix Timestamp)
 2. Convert the request body to a JSON string and get the MD5 hash of it
 3. Convert the body MD5 hash to base64
@@ -52,21 +49,19 @@ const generateSignature = ({
 };
 
 ```
-## Request headers
-```
-x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
-x-timestamp: 1663240633
-x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
-```
-## API Methods
-Name|Description
-----|-----------
-[Get balance](#balance-request)|Get MIN tokens account balance
-[Verify top-up request](#verify-top-up-request)|Verify data for creating a request to top-up a specified phone number
-[Create top-up request](#create-top-up-request)|Create a request to top-up a specified phone number
-[Get top-up request by id](#get-top-up-request-by-id)|Get the details of an top-up request
+## Each request should include the following headers
 
-## Balance request
+Header     | Description                                           |Example
+-----------|-------------------------------------------------------|-------
+x-client-id| clientId provided to you                              |vXVMhQlr5+sq4cPdCD5b4W0T=
+x-timestamp| timestamp of request                                  |1663240633
+x-signature| computed signature using clientSecret provided to you |Y90dweZduRFNEF8MsmEUExBg8b8ha=
+
+## API Methods
+
+### Balance
+Get MIN tokens account balance
+#### Request
 ```
 Request URL
 [GET] https://dev-aten.fonbnk-services.com/api/v1/top-up/balance
@@ -79,17 +74,19 @@ x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA=
 
 In this case the endpoint for signature will be `/api/v1/top-up/balance`
 
-## Balance response
+#### Response
 A successful request will return the following JSON encoded response
 
-**HTTP 200 OK**
 ```javascript
 {
     balance: 100000
 }
 ```
 
-## Verify top-up request
+### Verify top-up request
+Verify data for creating a request to top-up a specified phone number
+
+#### Request
 ```
 Request URL
 [POST] https://dev-aten.fonbnk-services.com/api/v1/top-up/verify-request
@@ -108,10 +105,9 @@ x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA=
 
 In this case the endpoint for signature will be `/api/v1/top-up/verify-request`
 
-## Verify top-up request response
+#### Response
 A successful request will return the following JSON encoded response
 
-**HTTP 200 OK**
 ```javascript
 {
     carrier: "Safaricom Kenya",
@@ -122,7 +118,10 @@ A successful request will return the following JSON encoded response
 }
 ```
 
-## Create top-up request
+### Create top-up request
+Create a request to top-up a specified phone number
+
+#### Request
 ```
 Request URL
 [POST] https://dev-aten.fonbnk-services.com/api/v1/top-up/create-request
@@ -141,10 +140,9 @@ x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA=
 
 In this case the endpoint for signature will be `/api/v1/top-up/create-request`
 
-## Create top-up request response
+#### Response
 A successful request will return the following JSON encoded response
 
-**HTTP 200 OK**
 ```javascript
 {
     requestId: "Y90dweZduRFNEF8Msm",
@@ -156,7 +154,10 @@ A successful request will return the following JSON encoded response
 }
 ```
 
-## Get top-up request by id
+### Get top-up request by id
+Get the details of a top-up request
+
+#### Request
 ```
 Request URL
 [GET] https://dev-aten.fonbnk-services.com/api/v1/top-up/request/<REQUEST_ID>
@@ -169,10 +170,9 @@ x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA=
 
 In this case the endpoint for signature will be `/api/v1/top-up/request/<REQUEST_ID>`
 
-## Get top-up request by id response
+#### Response
 A successful request will return the following JSON encoded response
 
-**HTTP 200 OK**
 ```javascript
 {
     requestId: "Y90dweZduRFNEF8Msm",
