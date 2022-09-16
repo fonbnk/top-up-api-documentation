@@ -7,7 +7,7 @@ The API is organized around REST. The API accepts json-encoded request bodies, r
 ## Request Authentication
 All requests should be signed using a HMAC256 algorithm and provided clientId and clientSecret.
 
-## How to compute the signature?
+## How to get the signature of the request?
 1. Generate a timestamp (Epoch Unix Timestamp)
 2. Convert the request body to a JSON string and get the MD5 hash of it
 3. Convert the body MD5 hash to base64
@@ -111,8 +111,8 @@ A successful request will return the following JSON encoded response
 ```javascript
 {
     carrier: "Safaricom Kenya",
-    minCost: 83,
-    exchangeRate: 1.2,
+    minTokenAmount: 83,
+    minTokenAmountToRate: 1.2,
     airtimeAmount: 100,
     recipientPhoneNumber: "254XXXXXXXXX"
 }
@@ -147,8 +147,8 @@ A successful request will return the following JSON encoded response
 {
     requestId: "Y90dweZduRFNEF8Msm",
     carrier: "Safaricom Kenya",
-    minCost: 83,
-    exchangeRate: 1.2,
+    minTokenAmount: 83,
+    minTokeneToAirtimeRate: 1.2,
     airtimeAmount: 100,
     recipientPhoneNumber: "254XXXXXXXXX"
 }
@@ -176,8 +176,10 @@ A successful request will return the following JSON encoded response
 ```javascript
 {
     requestId: "Y90dweZduRFNEF8Msm",
-    airtimeAmount: 100,
+    minTokenAmount: 83,
+    minTokeneToAirtimeRate: 1.2,
     status: "pending",
+    airtimeAmount: 100,
     recipientPhoneNumber: "254XXXXXXXXX"
 }
 ```
