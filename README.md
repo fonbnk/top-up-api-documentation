@@ -84,7 +84,8 @@ A successful request will return the following JSON encoded response
 ```
 
 ### Verify top-up request
-Verify data for creating a request to top-up a specified phone number
+This endpoint estimates the cost of the top-up and validates data you will need to provide to create a top-up request.  
+This endpoint doesn't charge MIN tokens from your balance.
 
 #### Request
 ```
@@ -119,7 +120,8 @@ A successful request will return the following JSON encoded response
 ```
 
 ### Create top-up request
-Create a request to top-up a specified phone number
+Create a request to top-up a specified phone number 
+This endpoint charges MIN tokens from your balance.
 
 #### Request
 ```
