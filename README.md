@@ -1,5 +1,9 @@
 # Fonbnk Inc. top-up API
 
+## API servers
+Sandbox: `https://dev-aten.fonbnk-services.com`
+
+Production: will be provided soon
 
 ## API Reference
 The API is organized around REST. The API accepts json-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
@@ -64,7 +68,7 @@ Get MIN tokens account balance
 #### Request
 ```
 Request URL
-[GET] https://dev-aten.fonbnk-services.com/api/v1/top-up/balance
+[GET] <SERVER_URL>/api/v1/top-up/balance
 
 Request Headers 
 x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
@@ -90,7 +94,7 @@ This endpoint doesn't charge MIN tokens from your balance.
 #### Request
 ```
 Request URL
-[POST] https://dev-aten.fonbnk-services.com/api/v1/top-up/verify-request
+[POST] <SERVER_URL>/api/v1/top-up/verify-request
 
 Request body
 {
@@ -126,7 +130,7 @@ This endpoint charges MIN tokens from your balance.
 #### Request
 ```
 Request URL
-[POST] https://dev-aten.fonbnk-services.com/api/v1/top-up/create-request
+[POST] <SERVER_URL>/api/v1/top-up/create-request
 
 Request body
 {
@@ -163,7 +167,7 @@ Get the details of a top-up request
 #### Request
 ```
 Request URL
-[GET] https://dev-aten.fonbnk-services.com/api/v1/top-up/request/<REQUEST_ID>
+[GET] <SERVER_URL>/api/v1/top-up/request/<REQUEST_ID>
 
 Request Headers 
 x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
