@@ -1,6 +1,6 @@
-# Fonbnk Inc. top-up API
+# Fonbnk Top Up API
 
-## API servers
+## API servers 
 Sandbox: `https://dev-aten.fonbnk-services.com`
 
 Production: will be provided soon
