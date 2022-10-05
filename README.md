@@ -15,11 +15,11 @@ All requests should be signed using a HMAC256 algorithm and provided clientId an
 1. Generate a timestamp (Epoch Unix Timestamp)
 2. Convert the request body to a JSON string and get the MD5 hash of it
 3. Convert the body MD5 hash to base64
-4. Concatenate the converted body MD5 hash, timestamp and the endpoint that called
+4. Concatenate the converted body MD5 hash, timestamp and the endpoint that is called
    `{bodyMD5Hash}:{timestamp}:{endpoint}`
 5. Decode the base64 encoded clientSecret
 6. Compute the SHA256 hash of the concatenated string. Use decoded clientSecret as a key. Convert the result to base64
-7. Add the clientId, signature and timestamp to HTTP headers
+7. Add the clientId, signature, and timestamp to HTTP headers
 
 The following pseudocode example demonstrates and explains how to sign a request
 ```
@@ -76,7 +76,7 @@ x-timestamp: 1663240633
 x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
 ```
 
-In this case the endpoint for signature will be `/api/v1/top-up/balance`
+In this case, the endpoint for signature will be `/api/v1/top-up/balance`
 
 #### Response
 A successful request will return the following JSON encoded response
@@ -88,7 +88,7 @@ A successful request will return the following JSON encoded response
 ```
 
 ### Verify top-up request
-This endpoint estimates the cost of the top-up and validates data you will need to provide to create a top-up request.  
+This endpoint estimates the top-up cost and validates the data you need to provide to create a top-up request.  
 This endpoint doesn't charge MIN tokens from your balance.
 
 #### Request
@@ -108,7 +108,7 @@ x-timestamp: 1663240633
 x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
 ```
 
-In this case the endpoint for signature will be `/api/v1/top-up/verify-request`
+In this case, the endpoint for signature will be `/api/v1/top-up/verify-request`
 
 #### Response
 A successful request will return the following JSON encoded response
@@ -144,7 +144,7 @@ x-timestamp: 1663240633
 x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
 ```
 
-In this case the endpoint for signature will be `/api/v1/top-up/create-request`
+In this case, the endpoint for signature will be `/api/v1/top-up/create-request`
 
 #### Response
 A successful request will return the following JSON encoded response
