@@ -3,7 +3,7 @@
 ## API servers 
 Sandbox: `https://dev-aten.fonbnk-services.com`
 
-Production: will be provided soon
+Production: `https://aten.fonbnk-services.com`
 
 ## API Reference
 The API is organized around REST. The API accepts json-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
