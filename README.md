@@ -1,6 +1,6 @@
 # Fonbnk Top Up
 
-Quickly and easily add credit to your customer's phone with our convenient top-up API.
+Quickly and easily add airtime credits to your customer's phone with our convenient top-up API.
 
 # The Dashboard
 Our web dashboard provides an easy way to stay on top of the activity in your account. It is personalized for your account, and all top-up requests you create using the API will appear in this dashboard.
