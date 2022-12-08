@@ -1,12 +1,25 @@
-# Fonbnk Top Up API
+# Fonbnk Top Up
+
+Quickly and easily add credit to your customer's phone with our convenient top-up API.
+
+# The Dashboard
+Our web dashboard provides an easy way to stay on top of the activity in your account. It is personalized for your account, and all top-up requests you create using the API will appear in this dashboard.
+
+### Dashboard URLs:
+Sandbox: `https://sandbox.top-up.fonbnk.com`
+
+Production: `https://top-up.fonbnk.com`
+
+<img width="960" alt="Screenshot 2022-12-08 at 12 23 21 PM" src="https://user-images.githubusercontent.com/6260572/206560165-648eba70-ee31-44a3-a093-98d3fe1c2b1a.png">
+
+# API 
+## Overview
+The API is organized around REST. The API accepts json-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
 
 ## API servers 
 Sandbox: `https://dev-aten.fonbnk-services.com`
 
 Production: `https://aten.fonbnk-services.com`
-
-## API Reference
-The API is organized around REST. The API accepts json-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
 
 ## Request Authentication
 All requests should be signed using a HMAC256 algorithm and provided clientId and clientSecret.
