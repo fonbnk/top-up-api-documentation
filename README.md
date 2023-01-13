@@ -10,8 +10,6 @@ Sandbox: `https://sandbox.top-up.fonbnk.com` [see sandbox testing](https://githu
 
 Production: `https://top-up.fonbnk.com`
 
-<img width="960" alt="Screenshot 2022-12-08 at 12 23 21 PM" src="https://user-images.githubusercontent.com/6260572/206560165-648eba70-ee31-44a3-a093-98d3fe1c2b1a.png">
-
 # Sandbox Testing
 When you interact with Sandbox version of the API, you have the same experience as you would in production, but you won’t get charged real tokens and won’t receive real top-ups just yet.
 
