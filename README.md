@@ -6,7 +6,7 @@ Quickly and easily add airtime credits to your customer's phone with our conveni
 Our web dashboard provides an easy way to stay on top of the activity in your account. It is personalized for your account, and all top-up requests you create using the API will appear in this dashboard.
 
 ### Dashboard URLs:
-Sandbox: `https://sandbox.top-up.fonbnk.com` [see sandbox testing](https://github.com/fonbnk/top-up-api-documentation/edit/main/README.md#sandbox-testing)
+Sandbox: `https://sandbox.top-up.fonbnk.com` [see sandbox testing](https://github.com/fonbnk/top-up-api-documentation#sandbox-testing)
 
 Production: `https://top-up.fonbnk.com`
 
