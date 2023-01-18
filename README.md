@@ -98,7 +98,7 @@ A successful request will return the following JSON encoded response
 
 ```javascript
 {
-    balance: 100000
+    balance: 1000.00
 }
 ```
 
@@ -131,8 +131,8 @@ A successful request will return the following JSON encoded response
 ```javascript
 {
     carrier: "Safaricom Kenya",
-    minTokenAmount: 83,
-    minTokenToAirtimeRate: 1.2,
+    usdAmount: 0.83,
+    exchangeRate: 120,
     airtimeAmount: 100,
     recipientPhoneNumber: "254XXXXXXXXX"
 }
@@ -168,8 +168,8 @@ A successful request will return the following JSON encoded response
 {
     requestId: "Y90dweZduRFNEF8Msm",
     carrier: "Safaricom Kenya",
-    minTokenAmount: 83,
-    minTokenToAirtimeRate: 1.2,
+    usdAmount: 0.83,
+    exchangeRate: 120,
     airtimeAmount: 100,
     recipientPhoneNumber: "254XXXXXXXXX",
     date: "2022-09-16T07:05:46.126Z"
@@ -198,8 +198,8 @@ A successful request will return the following JSON encoded response
 ```javascript
 {
     requestId: "Y90dweZduRFNEF8Msm",
-    minTokenAmount: 83,
-    minTokenToAirtimeRate: 1.2,
+    usdAmount: 0.83,
+    exchangeRate: 120,
     status: "pending",
     airtimeAmount: 100,
     recipientPhoneNumber: "254XXXXXXXXX",
