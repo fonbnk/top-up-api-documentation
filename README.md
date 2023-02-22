@@ -15,7 +15,7 @@ Our web dashboard provides an easy way to stay on top of the activity in your ac
 When you interact with Sandbox version of the API, you have the same experience as you would in production, but you won’t get charged real tokens and won’t receive real top-ups just yet.
 
 
-# API 
+# API Details
 ## Overview
 The API is organized around REST. The API accepts json-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
 
