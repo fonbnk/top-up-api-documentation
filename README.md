@@ -6,9 +6,10 @@ Quickly and easily add airtime credits to your customer's phone with our conveni
 Our web dashboard provides an easy way to stay on top of the activity in your account. It is personalized for your account, and all top-up requests you create using the API will appear in this dashboard.
 
 ### Dashboard URLs:
-| Sandbox | Production |
+| Environment | URL |
 |---------|------------|
-|https://sandbox.top-up.fonbnk.com|https://top-up.fonbnk.com|
+| Sandbox | https://sandbox.top-up.fonbnk.com |
+| Production | https://top-up.fonbnk.com|
 
 # Sandbox Testing
 When you interact with Sandbox version of the API, you have the same experience as you would in production, but you won’t get charged real tokens and won’t receive real top-ups just yet.
@@ -19,13 +20,14 @@ When you interact with Sandbox version of the API, you have the same experience 
 The API is organized around REST. The API accepts json-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
 
 ## API servers 
-| Sandbox | Production |
+| Environment | Server URL <SERVER_URL> |
 |---------|------------|
-|https://dev-aten.fonbnk-services.com | https://aten.fonbnk-services.com|
+| Sandbox | https://dev-aten.fonbnk-services.com |
+| Production | https://aten.fonbnk-services.com|
 
 
 ## Request Authentication
-All requests should be signed using a HMAC256 algorithm and provided clientId and clientSecret.
+All requests should be signed using a HMAC256 algorithm and provided `clientId` and `clientSecret`.
 
 ## How to get the signature of the request?
 1. Generate a timestamp (Epoch Unix Timestamp)
@@ -79,69 +81,9 @@ x-signature| computed signature using clientSecret provided to you |Y90dweZduRFN
 
 ## API Methods
 
-### Balance
-Get MIN tokens account balance
-#### Request
-```
-Request URL
-[GET] <SERVER_URL>/api/v1/top-up/balance
-
-Request Headers 
-x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
-x-timestamp: 1663240633
-x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
-```
-
-In this case, the endpoint for signature will be `/api/v1/top-up/balance`
-
-#### Response
-A successful request will return the following JSON encoded response
-
-```javascript
-{
-    balance: 1000.00
-}
-```
-
-### Verify top-up request
-This endpoint estimates the top-up cost and validates the data you need to provide to create a top-up request.  
-This endpoint doesn't charge MIN tokens from your balance.
-
-#### Request
-```
-Request URL
-[POST] <SERVER_URL>/api/v1/top-up/verify-request
-
-Request body
-{
-    airtimeAmount: 100,
-    recipientPhoneNumber: "254XXXXXXXXX",
-}
-
-Request Headers 
-x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
-x-timestamp: 1663240633
-x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
-```
-
-In this case, the endpoint for signature will be `/api/v1/top-up/verify-request`
-
-#### Response
-A successful request will return the following JSON encoded response
-
-```javascript
-{
-    carrier: "Safaricom Kenya",
-    usdAmount: 0.83,
-    exchangeRate: 120,
-    airtimeAmount: 100,
-    recipientPhoneNumber: "254XXXXXXXXX"
-}
-```
-
 ### Create top-up request
-Create a request to top-up a specified phone number 
-This endpoint charges MIN tokens from your balance.
+Create a request to top-up a specified phone number.  
+This endpoint reduces your account's balance and initiates a top-up.
 
 #### Request
 ```
@@ -154,13 +96,14 @@ Request body
     recipientPhoneNumber: "254XXXXXXXXX",
 }
 
+Endpoint for signature
+/api/v1/top-up/create-request
+
 Request Headers 
 x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
 x-timestamp: 1663240633
 x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
 ```
-
-In this case, the endpoint for signature will be `/api/v1/top-up/create-request`
 
 #### Response
 A successful request will return the following JSON encoded response
@@ -185,13 +128,14 @@ Get the details of a top-up request
 Request URL
 [GET] <SERVER_URL>/api/v1/top-up/request/<REQUEST_ID>
 
+Endpoint for signature 
+/api/v1/top-up/request/<REQUEST_ID>
+
 Request Headers 
 x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
 x-timestamp: 1663240633
 x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
 ```
-
-In this case the endpoint for signature will be `/api/v1/top-up/request/<REQUEST_ID>`
 
 #### Response
 A successful request will return the following JSON encoded response
@@ -208,7 +152,7 @@ A successful request will return the following JSON encoded response
 }
 ```
 
-## Top up request statuses
+### Top up request statuses
 
 Status|Description
 -------|----
@@ -217,3 +161,67 @@ acknowledged|The top-up request has been sent and will be executed now
 executed|The top-up request was executed
 completed|The recipient got the airtime
 failed|The top-up request failed, MIN tokens will be refunded
+
+### Balance
+Get account balance
+#### Request
+```
+Request URL
+[GET] <SERVER_URL>/api/v1/top-up/balance
+
+Endpoint for signature 
+/api/v1/top-up/balance
+
+Request Headers 
+x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
+x-timestamp: 1663240633
+x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
+```
+
+#### Response
+A successful request will return the following JSON encoded response
+
+```javascript
+{
+    balance: 1000.00
+}
+```
+
+### Verify top-up request
+This endpoint estimates the top-up cost and validates the data you need to provide to create a top-up request.  
+This endpoint doesn't reduce your account's balance.
+
+#### Request
+```
+Request URL
+[POST] <SERVER_URL>/api/v1/top-up/verify-request
+
+Request body
+{
+    airtimeAmount: 100,
+    recipientPhoneNumber: "254XXXXXXXXX",
+}
+
+Endpoint for signature 
+/api/v1/top-up/verify-request
+
+Request Headers 
+x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
+x-timestamp: 1663240633
+x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
+```
+
+#### Response
+A successful request will return the following JSON encoded response
+
+```javascript
+{
+    carrier: "Safaricom Kenya",
+    usdAmount: 0.83,
+    exchangeRate: 120,
+    airtimeAmount: 100,
+    recipientPhoneNumber: "254XXXXXXXXX"
+}
+```
+
+
