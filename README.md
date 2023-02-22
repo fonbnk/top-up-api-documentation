@@ -6,9 +6,9 @@ Quickly and easily add airtime credits to your customer's phone with our conveni
 Our web dashboard provides an easy way to stay on top of the activity in your account. It is personalized for your account, and all top-up requests you create using the API will appear in this dashboard.
 
 ### Dashboard URLs:
-Sandbox: `https://sandbox.top-up.fonbnk.com` [see sandbox testing](https://github.com/fonbnk/top-up-api-documentation#sandbox-testing)
-
-Production: `https://top-up.fonbnk.com`
+| Sandbox | Production |
+|---------|------------|
+|https://sandbox.top-up.fonbnk.com|https://top-up.fonbnk.com|
 
 # Sandbox Testing
 When you interact with Sandbox version of the API, you have the same experience as you would in production, but you won’t get charged real tokens and won’t receive real top-ups just yet.
@@ -19,9 +19,10 @@ When you interact with Sandbox version of the API, you have the same experience 
 The API is organized around REST. The API accepts json-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
 
 ## API servers 
-Sandbox: `https://dev-aten.fonbnk-services.com` [see sandbox testing](https://github.com/fonbnk/top-up-api-documentation/edit/main/README.md#sandbox-testing)
+| Sandbox | Production |
+|---------|------------|
+|https://dev-aten.fonbnk-services.com | https://aten.fonbnk-services.com|
 
-Production: `https://aten.fonbnk-services.com`
 
 ## Request Authentication
 All requests should be signed using a HMAC256 algorithm and provided clientId and clientSecret.
