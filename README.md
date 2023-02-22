@@ -75,9 +75,9 @@ const generateSignature = ({
 
 Header     | Description                                           |Example
 -----------|-------------------------------------------------------|-------
-x-client-id| clientId provided to you                              |vXVMhQlr5+sq4cPdCD5b4W0T=
-x-timestamp| timestamp of request                                  |1663240633
-x-signature| computed signature using clientSecret provided to you |Y90dweZduRFNEF8MsmEUExBg8b8ha=
+x-client-id| `clientId` provided to you                              |vXVMhQlr5+sq4cPdCD5b4W0T=
+x-timestamp| A UNIX timestamp you generate before sending a request to us. Please generate this timestamp right before sending a request to us and re-generate it for every request. |1663240633
+x-signature| Computed signature using `clientSecret` provided to you. |Y90dweZduRFNEF8MsmEUExBg8b8ha=
 
 ## API Methods
 
