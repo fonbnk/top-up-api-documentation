@@ -160,7 +160,7 @@ pending|The top-up request was succesfully created
 acknowledged|The top-up request has been sent and will be executed now
 executed|The top-up request was executed
 completed|The recipient got the airtime
-failed|The top-up request failed, MIN tokens will be refunded
+failed|The top-up request failed, your account will be refunded
 
 ### Balance
 Get account balance
