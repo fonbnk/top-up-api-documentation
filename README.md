@@ -111,11 +111,10 @@ A successful request will return the following JSON encoded response
 ```javascript
 {
     requestId: "Y90dweZduRFNEF8Msm",
-    carrier: "Safaricom Kenya",
-    usdAmount: 0.83,
-    exchangeRate: 120,
+    status: "pending",
     airtimeAmount: 100,
-    recipientPhoneNumber: "254XXXXXXXXX",
+    carrier: "Safaricom Kenya",
+    recipientPhoneNumber: "XXXXXXXXXXXX",
     date: "2022-09-16T07:05:46.126Z"
 }
 ```
@@ -145,9 +144,9 @@ A successful request will return the following JSON encoded response
     requestId: "Y90dweZduRFNEF8Msm",
     usdAmount: 0.83,
     exchangeRate: 120,
-    status: "pending",
+    status: "completed",
     airtimeAmount: 100,
-    recipientPhoneNumber: "254XXXXXXXXX",
+    recipientPhoneNumber: "XXXXXXXXXXXX",
     date: "2022-09-16T07:05:46.126Z"
 }
 ```
