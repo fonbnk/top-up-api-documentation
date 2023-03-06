@@ -31,7 +31,7 @@ All requests should be signed using a HMAC256 algorithm and provided `clientId` 
 
 ## How to get the signature of the request?
 1. Generate a timestamp (Epoch Unix Timestamp)
-2. Convert the request body to a JSON string and get the MD5 hash of it
+2. Convert the request data to a JSON string and get the MD5 hash of it
 3. Convert the body MD5 hash to base64
 4. Concatenate the converted body MD5 hash, timestamp and the endpoint that is called
    `{bodyMD5Hash}:{timestamp}:{endpoint}`
@@ -53,18 +53,22 @@ import utf8 from 'utf8';
 
 const generateSignature = ({
   clientSecret,
-  body,
+  requestData,
   timestamp,
   endpoint,
 }: {
   clientSecret: string;
-  body: object;
+  requestData?: object; //empty for GET request
   timestamp: string;
   endpoint: string;
 }) => {
+  let body = '';
+  if (requestData) {
+    body = JSON.stringify(requestData);
+  }
   const hash = crypto.createHash('md5');
   let hmac = crypto.createHmac('sha256', Buffer.from(clientSecret, 'base64'));
-  let contentMD5 = hash.update(utf8.encode(JSON.stringify(body))).digest('base64');
+  let contentMD5 = hash.update(utf8.encode(body)).digest('base64');
   let stringToSign = `${contentMD5}:${timestamp}:${endpoint}`;
   hmac.update(stringToSign);
   return hmac.digest('base64');
