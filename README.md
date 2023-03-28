@@ -88,6 +88,17 @@ x-signature| Computed signature using `clientSecret` provided to you. |Y90dweZdu
 ### Create top-up request
 Create a request to top-up a specified phone number.  
 This endpoint reduces your account's balance and initiates a top-up.
+Additionally, you can pass the carrier name to top-up a specific carrier.
+If you don't pass the carrier name, we will automatically detect the carrier and top-up the phone number, but it may
+take a few seconds to complete.
+Furthermore, you can pass the strategy parameter to specify the strategy of fulfilling the top-up request. Default strategy is `best_price`.
+Available strategies are:
+
+Strategy   | Description
+-----------|-------------------------------------------------------
+best_price| At first, we will try to fulfill the request using the market price (p2p). If we can't fulfill the request using the wholesale price.                           
+wholesale| We will try to fulfill the request only using the wholesale price
+market| We will try to fulfill the request only using the market price (p2p)
 
 #### Request
 ```
@@ -98,6 +109,8 @@ Request body
 {
     airtimeAmount: 100,
     recipientPhoneNumber: "254XXXXXXXXX",
+    carrierName: "Safaricom Kenya", //optional
+    strategy: "best_price", //optional
 }
 
 Endpoint for signature
@@ -121,6 +134,38 @@ A successful request will return the following JSON encoded response
     recipientPhoneNumber: "XXXXXXXXXXXX",
     date: "2022-09-16T07:05:46.126Z"
 }
+```
+
+### List of available carriers
+Returns a list of available carriers
+
+#### Request
+```
+Request URL
+[GET] <SERVER_URL>/api/v1/top-up/carriers
+
+Endpoint for signature
+/api/v1/top-up/carriers
+
+Request Headers 
+x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
+x-timestamp: 1663240633
+x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
+```
+
+#### Response
+A successful request will return the following JSON encoded response
+
+```javascript
+[
+    "MTN Nigeria",
+    "Airtel Nigeria",
+    "9mobile Nigeria",
+    "Glo Nigeria",
+    "Safaricom Kenya",
+    "Airtel Kenya",
+    "Telkom Kenya",
+]
 ```
 
 ### Get top-up request by id
@@ -160,8 +205,6 @@ A successful request will return the following JSON encoded response
 Status|Description
 -------|----
 pending|The top-up request was succesfully created 
-acknowledged|The top-up request has been sent and will be executed now
-executed|The top-up request was executed
 completed|The recipient got the airtime
 failed|The top-up request failed, your account will be refunded
 
@@ -193,6 +236,11 @@ A successful request will return the following JSON encoded response
 ### Verify top-up request
 This endpoint estimates the top-up cost and validates the data you need to provide to create a top-up request.  
 This endpoint doesn't reduce your account's balance.
+Additionally, you can pass the carrier name to top-up a specific carrier.
+If you don't pass the carrier name, we will automatically detect the carrier and top-up the phone number, but it may
+take a few seconds to complete.
+Furthermore, you can pass the strategy parameter to specify the strategy of estimating price. Default strategy is `best_price`.
+Available strategies are: `best_price`, `wholesale`, `market`.
 
 #### Request
 ```
@@ -203,6 +251,8 @@ Request body
 {
     airtimeAmount: 100,
     recipientPhoneNumber: "254XXXXXXXXX",
+    carrierName: "Safaricom Kenya", //optional
+    strategy: "best_price", //optional
 }
 
 Endpoint for signature 
