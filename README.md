@@ -89,16 +89,16 @@ x-signature| Computed signature using `clientSecret` provided to you. |Y90dweZdu
 Create a request to top-up a specified phone number.  
 This endpoint reduces your account's balance and initiates a top-up.
 Additionally, you can pass the carrier name to top-up a specific carrier.
-If you don't pass the carrier name, we will automatically detect the carrier and top-up the phone number, but it may
+If you don't pass the carrier name, we will automatically detect the carrier and top-up the phone number, which may
 take a few seconds to complete.
-Furthermore, you can pass the strategy parameter to specify the strategy of fulfilling the top-up request. Default strategy is `best_price`.
+Furthermore, you can pass the strategy parameter to specify the strategy for fulfilling the top-up request. The default strategy is `best_price`.
 Available strategies are:
 
 Strategy   | Description
 -----------|-------------------------------------------------------
-best_price| At first, we will try to fulfill the request using the market price (p2p). If we can't fulfill the request using the wholesale price.                           
-wholesale| We will try to fulfill the request only using the wholesale price
-market| We will try to fulfill the request only using the market price (p2p)
+best_price| At first, we try to fulfill the request using the market price (p2p). If we can't, we will fulfill the request using the wholesale price.                               
+wholesale| We fulfill the request only using the wholesale price.
+market| We fulfill the request only using the market price (p2p).
 
 #### Request
 ```
@@ -239,7 +239,7 @@ This endpoint doesn't reduce your account's balance.
 Additionally, you can pass the carrier name to top-up a specific carrier.
 If you don't pass the carrier name, we will automatically detect the carrier and top-up the phone number, but it may
 take a few seconds to complete.
-Furthermore, you can pass the strategy parameter to specify the strategy of estimating price. Default strategy is `best_price`.
+Furthermore, you can pass the strategy parameter to specify the price estimation strategy. The default strategy is `best_price`.
 Available strategies are: `best_price`, `wholesale`, `market`.
 
 #### Request
