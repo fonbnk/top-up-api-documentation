@@ -2,14 +2,26 @@
 
 Quickly and easily add airtime credits to your customer's phone with our convenient top-up API.
 
+# Table of Contents
+- [The Dashboard](#the-dashboard)
+- [Sandbox Testing](#sandbox-testing)
+- [API Details](#api-details)
+   - [Api Servers](#api-servers)
+   - [Request Authentication](#request-authentication)
+   - [Api Methods](#api-methods)
+   - [Request stategies](#strategies)
+   - [Top-up request statuses](#top-up-request-statuses)
+- [Error Codes](#error-codes)
+
+
 # The Dashboard
 Our web dashboard provides an easy way to stay on top of the activity in your account. It is personalized for your account, and all top-up requests you create using the API will appear in this dashboard.
 
 ### Dashboard URLs:
-| Environment | URL |
-|---------|------------|
-| Sandbox | https://sandbox.top-up.fonbnk.com |
-| Production | https://top-up.fonbnk.com|
+| Environment  | URL                               |
+|--------------|-----------------------------------|
+| Sandbox      | https://sandbox.top-up.fonbnk.com |
+| Production   | https://top-up.fonbnk.com         |
 
 # Sandbox Testing
 When you interact with Sandbox version of the API, you have the same experience as you would in production, but you won’t get charged real tokens and won’t receive real top-ups just yet.
@@ -19,11 +31,11 @@ When you interact with Sandbox version of the API, you have the same experience 
 ## Overview
 The API is organized around REST. The API accepts json-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes and verbs.
 
-## API servers 
-| Environment | Server URL <SERVER_URL> |
-|---------|------------|
-| Sandbox | https://dev-aten.fonbnk-services.com |
-| Production | https://aten.fonbnk-services.com|
+## API servers
+| Environment  | Server URL <SERVER_URL>              |
+|--------------|--------------------------------------|
+| Sandbox      | https://dev-aten.fonbnk-services.com |
+| Production   | https://aten.fonbnk-services.com     |
 
 
 ## Request Authentication
@@ -77,11 +89,11 @@ const generateSignature = ({
 ```
 ## Each request should include the following headers
 
-Header     | Description                                           |Example
------------|-------------------------------------------------------|-------
-x-client-id| `clientId` provided to you                              |vXVMhQlr5+sq4cPdCD5b4W0T=
-x-timestamp| A UNIX timestamp you generate before sending a request to us. Please generate this timestamp right before sending a request to us and re-generate it for every request. |1663240633
-x-signature| Computed signature using `clientSecret` provided to you. |Y90dweZduRFNEF8MsmEUExBg8b8ha=
+| Header      | Description                                                                                                                                                             | Example                        |
+|-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| x-client-id | `clientId` provided to you                                                                                                                                              | vXVMhQlr5+sq4cPdCD5b4W0T=      |
+| x-timestamp | A UNIX timestamp you generate before sending a request to us. Please generate this timestamp right before sending a request to us and re-generate it for every request. | 1663240633                     |
+| x-signature | Computed signature using `clientSecret` provided to you.                                                                                                                | Y90dweZduRFNEF8MsmEUExBg8b8ha= |
 
 ## API Methods
 
@@ -91,14 +103,15 @@ This endpoint reduces your account's balance and initiates a top-up.
 Additionally, you can pass the carrier name to top-up a specific carrier.
 If you don't pass the carrier name, we will automatically detect the carrier and top-up the phone number, which may
 take a few seconds to complete.
+#### Strategies
 Furthermore, you can pass the strategy parameter to specify the strategy for fulfilling the top-up request. The default strategy is `best_price`.
 Available strategies are:
 
-Strategy   | Description
------------|-------------------------------------------------------
-best_price| At first, we try to fulfill the request using the market price (p2p). If we can't, we will fulfill the request using the wholesale price.                               
-wholesale| We fulfill the request only using the wholesale price.
-market| We fulfill the request only using the market price (p2p).
+| Strategy   |  Description                                                                                                                              |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| best_price | At first, we try to fulfill the request using the market price (p2p). If we can't, we will fulfill the request using the wholesale price. |                               
+| wholesale  | We fulfill the request only using the wholesale price.                                                                                    |
+| market     | We fulfill the request only using the market price (p2p).                                                                                 |
 
 #### Request
 ```
@@ -200,6 +213,40 @@ A successful request will return the following JSON encoded response
 }
 ```
 
+### Get top-up requests list
+Get the list of a top-up requests. You can pass the `limit` and `page` parameters to paginate the results. The result is sorted by the `date` field in descending order.
+
+#### Request
+```
+Request URL
+[GET] <SERVER_URL>/api/v1/top-up/requests?limit=10&page=1
+
+Endpoint for signature 
+/api/v1/top-up/request/requests?limit=10&page=1
+
+Request Headers 
+x-client-id: vXVMhQlr5+sq4cPdCD5b4W0T6wM53nDGraxtadiavbg= 
+x-timestamp: 1663240633
+x-signature: Y90dweZduRFNEF8MsmEUExBg8b8ha5SLYHz5uoYO8wA= 
+```
+
+#### Response
+A successful request will return the following JSON encoded response
+
+```javascript
+[
+    {
+        requestId: "Y90dweZduRFNEF8Msm",
+        usdAmount: 0.83,
+        exchangeRate: 120,
+        status: "completed",
+        airtimeAmount: 100,
+        recipientPhoneNumber: "XXXXXXXXXXXX",
+        date: "2022-09-16T07:05:46.126Z"
+    }
+]
+```
+
 ### Top up request statuses
 
 Status|Description
@@ -277,4 +324,26 @@ A successful request will return the following JSON encoded response
 }
 ```
 
+## Error codes
 
+| Code | Description                    |
+|------|--------------------------------|
+| 1000 | Too low airtime amount         |
+| 1001 | Too big airtime amount         |
+| 1002 | Unsupported country            |
+| 1003 | Unsupported carrier            |
+| 1004 | Unable to fulfill the request  |
+| 1005 | Invalid airtime amount format  |
+| 1006 | Invalid recipient phone number |
+| 1007 | Invalid strategy               |
+| 1008 | Invalid top-up request ID      |
+| 1009 | Insufficient funds             |
+
+#### All validation or processing error responses will have the following format and HTTP status code 400 (Bad request)
+```javascript
+{
+    message: "Validation error",
+    errorCode: "1000",
+    description: "Too low airtime amount"
+}
+```
