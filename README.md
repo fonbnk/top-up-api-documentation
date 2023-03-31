@@ -332,7 +332,7 @@ A successful request will return the following JSON encoded response
 | 1001 | Too big airtime amount         |
 | 1002 | Unsupported country            |
 | 1003 | Unsupported carrier            |
-| 1004 | Service unavailable            |
+| 1004 | Unable to fulfil request       |
 | 1005 | Invalid airtime amount format  |
 | 1006 | Invalid recipient phone number |
 | 1007 | Invalid strategy               |
