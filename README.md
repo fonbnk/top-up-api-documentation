@@ -326,18 +326,19 @@ A successful request will return the following JSON encoded response
 
 ## Error codes
 
-| Code | Description                    |
-|------|--------------------------------|
-| 1000 | Too low airtime amount         |
-| 1001 | Too big airtime amount         |
-| 1002 | Unsupported country            |
-| 1003 | Unsupported carrier            |
-| 1004 | Unable to fulfill the request  |
-| 1005 | Invalid airtime amount format  |
-| 1006 | Invalid recipient phone number |
-| 1007 | Invalid strategy               |
-| 1008 | Invalid top-up request ID      |
-| 1009 | Insufficient funds             |
+| Code | Description                          |
+|------|--------------------------------------|
+| 1000 | Too low airtime amount               |
+| 1001 | Too big airtime amount               |
+| 1002 | Unsupported country                  |
+| 1003 | Unsupported carrier                  |
+| 1004 | Unable to fulfill the request        |
+| 1005 | Invalid airtime amount format        |
+| 1006 | Invalid recipient phone number       |
+| 1007 | Invalid strategy                     |
+| 1008 | Invalid top-up request ID            |
+| 1009 | Insufficient funds                   |
+| 1010 | Unsupported strategy for the carrier |
 
 #### All validation or processing error responses will have the following format and HTTP status code 400 (Bad request)
 ```javascript
